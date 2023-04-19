@@ -89,6 +89,7 @@ java_library(
         "ElementDescriptors.java",
     ],
     deps = [
+        "//java/dagger/internal/codegen/xprocessing",
         "//third_party/java/auto:common",
     ],
 )

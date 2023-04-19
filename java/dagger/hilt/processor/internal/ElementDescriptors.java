@@ -19,11 +19,11 @@ package dagger.hilt.processor.internal;
 import static com.google.auto.common.MoreElements.asType;
 import static com.google.auto.common.MoreElements.isType;
 
+import androidx.room.compiler.processing.XExecutableElement;
+import androidx.room.compiler.processing.XFieldElement;
 import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.ArrayType;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.ErrorType;
@@ -49,8 +49,8 @@ public final class ElementDescriptors {
    * href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.3.2">JVM
    * specification, section 4.3.2</a>.
    */
-  public static String getFieldDescriptor(VariableElement element) {
-    return element.getSimpleName() + ":" + getDescriptor(element.asType());
+  public static String getFieldDescriptor(XFieldElement element) {
+    return element.getJvmDescriptor();
   }
 
   /**
@@ -62,8 +62,8 @@ public final class ElementDescriptors {
    * href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.3.3">JVM
    * specification, section 4.3.3</a>.
    */
-  public static String getMethodDescriptor(ExecutableElement element) {
-    return element.getSimpleName() + getDescriptor(element.asType());
+  public static String getMethodDescriptor(XExecutableElement element) {
+    return element.getJvmDescriptor();
   }
 
   private static String getDescriptor(TypeMirror t) {

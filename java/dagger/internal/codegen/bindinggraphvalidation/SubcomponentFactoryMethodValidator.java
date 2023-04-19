@@ -26,6 +26,7 @@ import static javax.tools.Diagnostic.Kind.ERROR;
 import androidx.room.compiler.processing.XExecutableType;
 import androidx.room.compiler.processing.XType;
 import androidx.room.compiler.processing.XTypeElement;
+import androidx.room.compiler.processing.compat.XConverters;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
@@ -102,6 +103,7 @@ final class SubcomponentFactoryMethodValidator extends ValidationBindingGraphPlu
     ComponentNode parent = (ComponentNode) bindingGraph.network().incidentNodes(edge).source();
     XType parentType = parent.componentPath().currentComponent().xprocessing().getType();
     XExecutableType factoryMethodType = edge.factoryMethod().xprocessing().asMemberOf(parentType);
+    XConverters.getProcessingEnv(factoryMethodType);
     return factoryMethodType.getParameterTypes().stream()
         .map(XType::getTypeElement)
         .collect(toImmutableSet());
